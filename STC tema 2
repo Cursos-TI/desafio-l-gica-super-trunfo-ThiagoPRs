@@ -1,0 +1,52 @@
+#include <stdio.h>  
+
+// Estrutura para armazenar os atributos da carta  
+typedef struct {  
+    char estado[3];             
+    char codigo[10];           
+    char nomeCidade[50];     
+    int populacao;          
+    float area;              
+    float pib;      
+    int numPontosTuristicos;    
+} Carta;  
+
+// Função para calcular a densidade populacional  
+float calcularDensidadePopulacional(int populacao, float area) {  
+    return populacao / area;  
+}  
+
+// Função para calcular PIB per capita  
+float calcularPIBPerCapita(float pib, int populacao) {  
+    return populacao ? (pib / populacao) : 0; // Evitar divisão por zero  
+}  
+
+int main() {  
+    Carta carta1 = {"SP", "001", "São Paulo", 12300000, 1521.11, 705.3, 300};  
+    Carta carta2 = {"RJ", "002", "Rio de Janeiro", 6000000, 1182.31, 383.0, 500};  
+ 
+    float densidade1 = calcularDensidadePopulacional(carta1.populacao, carta1.area);  
+    float pibPerCapita1 = calcularPIBPerCapita(carta1.pib, carta1.populacao);  
+    float densidade2 = calcularDensidadePopulacional(carta2.populacao, carta2.area);  
+    float pibPerCapita2 = calcularPIBPerCapita(carta2.pib, carta2.populacao);  
+    
+    int atributoEscolhido = carta1.populacao;  // Exemplo de comparação pela população  
+    int atributoComparado = carta2.populacao;  
+
+    // Comparar as cartas  
+    if (atributoEscolhido > atributoComparado) {  
+        printf("Comparação de cartas (Atributo: População):\n");  
+        printf("Carta 1 - %s (%s): %d\n", carta1.nomeCidade, carta1.estado, carta1.populacao);  
+        printf("Carta 2 - %s (%s): %d\n", carta2.nomeCidade, carta2.estado, carta2.populacao);  
+        printf("Resultado: Carta 1 (%s) venceu!\n", carta1.nomeCidade);  
+    } else if (atributoEscolhido < atributoComparado) {  
+        printf("Comparação de cartas (Atributo: População):\n");  
+        printf("Carta 1 - %s (%s): %d\n", carta1.nomeCidade, carta1.estado, carta1.populacao);  
+        printf("Carta 2 - %s (%s): %d\n", carta2.nomeCidade, carta2.estado, carta2.populacao);  
+        printf("Resultado: Carta 2 (%s) venceu!\n", carta2.nomeCidade);  
+    } else {  
+        printf("As duas cartas têm a mesma população!\n");  
+    }  
+
+    return 0;  
+}  
